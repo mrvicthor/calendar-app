@@ -18,6 +18,7 @@ type CalendarContext = {
   currentMonth: number;
   currentYear: number;
   presentDay: number;
+  handleDateClick: (date: Date) => void;
 };
 
 export const CalendarContext = createContext<CalendarContext | undefined>(
