@@ -1,16 +1,15 @@
 import Calendar from "./calendar";
-import Details from "./details";
+import Layout from "./layout";
+
 import Header from "./header";
 
 const Home = () => {
   return (
     <>
       <Header />
-      <main className="grid [grid-template-columns:20rem_1fr] px-6 gap-4 pb-4">
+      <main className="grid [grid-template-columns:20rem_1fr] px-6 gap-4 h-[45rem]">
         <Calendar />
-        <section className="bg-white rounded-2xl">
-          <Details />
-        </section>
+        <Layout />
       </main>
     </>
   );
