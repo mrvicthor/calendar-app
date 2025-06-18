@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { CalendarContext, type CalendarDay } from "../types/context";
+import {
+  CalendarContext,
+  type CalendarDay,
+  type Layout,
+} from "../types/context";
+import { MONTHS } from "../utils";
 
 export const CalenderProvider = ({
   children,
@@ -9,6 +14,8 @@ export const CalenderProvider = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [layout, setLayout] = useState<Layout>("Week");
+  const [showLayout, setShowLayout] = useState(false);
 
   const today = new Date();
   const presentDay = today.getDate();
@@ -32,13 +39,45 @@ export const CalenderProvider = ({
   const navigateMonth = (direction: "prev" | "next") => {
     setCurrentDate((prevDate) => {
       const newDate = new Date(prevDate);
-      if (direction === "prev") {
-        newDate.setMonth(prevDate.getMonth() - 1);
+      if (layout === "Day") {
+        newDate.setDate(prevDate.getDate() + (direction === "next" ? 1 : -1));
+      } else if (layout === "Month") {
+        newDate.setMonth(prevDate.getMonth() + (direction === "next" ? 1 : -1));
       } else {
-        newDate.setMonth(prevDate.getMonth() + 1);
+        newDate.setDate(prevDate.getDate() + (direction === "next" ? 7 : -7));
       }
       return newDate;
     });
+  };
+
+  const getWeekStart = (date: Date) => {
+    const start = new Date(date);
+    start.setDate(date.getDate() - date.getDay());
+    return start;
+  };
+
+  const getLayoutTitle = () => {
+    if (layout === "Day") {
+      return currentDate.toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    } else if (layout === "Week") {
+      const weekStart = getWeekStart(currentDate);
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekStart.getDate() + 6);
+
+      if (weekStart.getMonth() === weekEnd.getMonth()) {
+        return `${MONTHS[weekStart.getMonth()]} ${weekStart.getFullYear()}`;
+      } else {
+        return `${MONTHS[weekStart.getMonth()]} - ${
+          MONTHS[weekEnd.getMonth()]
+        } ${weekStart.getFullYear()}`;
+      }
+    } else {
+      return `${MONTHS[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+    }
   };
 
   const navigateToToday = () => {
@@ -46,12 +85,18 @@ export const CalenderProvider = ({
     setSelectedDate(new Date());
   };
 
+  const toggleLayout = () => setShowLayout(!showLayout);
+
   const isToday = (date: Date) => {
     return date.toDateString() === today.toDateString();
   };
 
   const isSelected = (date: Date) => {
     return selectedDate && date.toDateString() === selectedDate.toDateString();
+  };
+
+  const isNavigatedDate = (date: Date) => {
+    return date.toDateString() === currentDate.toDateString();
   };
 
   const isSameMonth = (date: Date) => {
@@ -63,6 +108,8 @@ export const CalenderProvider = ({
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
   };
+
+  const handleSelectLayout = (value: Layout) => setLayout(value);
 
   const calendarDays: CalendarDay[] = [];
 
@@ -112,6 +159,13 @@ export const CalenderProvider = ({
         currentYear,
         presentDay,
         handleDateClick,
+        layout,
+        handleSelectLayout,
+        showLayout,
+        toggleLayout,
+        currentDate,
+        isNavigatedDate,
+        getLayoutTitle,
       }}
     >
       {children}

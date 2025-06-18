@@ -21,7 +21,11 @@ const Calendar = () => {
     handleDateClick,
     isToday,
     isSelected,
+    navigateMonth,
+
+    isNavigatedDate,
   } = useCalendarContext();
+
   return (
     <section>
       <div className="space-y-2">
@@ -29,10 +33,16 @@ const Calendar = () => {
           <span>{MONTHS[currentMonth]}</span>
           <span className="mr-auto">{currentYear}</span>{" "}
           <div className="flex items-center gap-1">
-            <button className="cursor-pointer h-8 w-8 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center">
+            <button
+              onClick={() => navigateMonth("prev")}
+              className="cursor-pointer h-8 w-8 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center"
+            >
               <MdArrowBackIos size={14} />
             </button>
-            <button className="cursor-pointer h-8 w-8 rounded-full flex items-center justify-center hover:bg-[#ECF4F4]">
+            <button
+              onClick={() => navigateMonth("next")}
+              className="cursor-pointer h-8 w-8 rounded-full flex items-center justify-center hover:bg-[#ECF4F4]"
+            >
               <MdArrowForwardIos size={14} />
             </button>
           </div>
@@ -50,7 +60,7 @@ const Calendar = () => {
         <div className="grid grid-cols-7 gap-1">
           {calendarDays.map((dayInfo, index) => {
             const { date, day, isCurrentMonth } = dayInfo;
-            console.log(isToday(date));
+
             return (
               <button
                 key={index}
@@ -65,7 +75,9 @@ const Calendar = () => {
                   isSelected(date) &&
                   !isToday(date) &&
                   "bg-gray-200 hover:bg-gray-300"
-                } ${isCurrentMonth && "text-gray-900"}`}
+                } ${isCurrentMonth && "text-gray-900"} ${
+                  isNavigatedDate(date) && "bg-[#ECFCFC]"
+                } `}
               >
                 {day}
               </button>

@@ -6,6 +6,8 @@ export type CalendarDay = {
   day: number;
 };
 
+export type Layout = "Month" | "Week" | "Day";
+
 type CalendarContext = {
   isCollapsed: boolean;
   navigateMonth: (direction: "prev" | "next") => void;
@@ -19,6 +21,13 @@ type CalendarContext = {
   currentYear: number;
   presentDay: number;
   handleDateClick: (date: Date) => void;
+  layout: string;
+  handleSelectLayout: (value: Layout) => void;
+  toggleLayout: () => void;
+  showLayout: boolean;
+  currentDate: Date;
+  isNavigatedDate: (date: Date) => boolean;
+  getLayoutTitle: () => string;
 };
 
 export const CalendarContext = createContext<CalendarContext | undefined>(
