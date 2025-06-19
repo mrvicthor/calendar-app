@@ -1,4 +1,5 @@
 import { useCalendarContext } from "../hooks/useCalendarContext";
+import { TIME_SLOTS } from "../utils";
 
 // const TIME_SLOTS = [
 //   "",
@@ -26,14 +27,6 @@ import { useCalendarContext } from "../hooks/useCalendarContext";
 //   "10 PM",
 //   "11 PM",
 // ];
-
-const TIME_SLOTS = Array.from(
-  { length: 24 },
-  (_, i) =>
-    `${i === 0 ? "" : i > 12 ? i - 12 : i} ${
-      i === 0 ? "" : i < 12 ? "AM" : "PM"
-    }`
-);
 
 const DayView = () => {
   const { currentDate } = useCalendarContext();

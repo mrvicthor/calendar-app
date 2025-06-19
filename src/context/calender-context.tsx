@@ -166,6 +166,7 @@ export const CalenderProvider = ({
         currentDate,
         isNavigatedDate,
         getLayoutTitle,
+        getWeekStart,
       }}
     >
       {children}

@@ -1,14 +1,14 @@
 import { useCalendarContext } from "../hooks/useCalendarContext";
+import { DAYS } from "../utils";
 
-const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const MonthView = () => {
   const { calendarDays, isToday, isNavigatedDate } = useCalendarContext();
   return (
     <section className="grid grid-cols-7 gap-0 h-full">
-      {days.map((day) => (
+      {DAYS.map((day) => (
         <div
           key={day}
-          className="text-center text-sm border-r border-r-[#DDE3E9] text-[#444746]"
+          className="text-center text-sm border-r border-r-[#DDE3E9] text-[#444746] uppercase"
         >
           {day}
         </div>

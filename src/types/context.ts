@@ -28,6 +28,7 @@ type CalendarContext = {
   currentDate: Date;
   isNavigatedDate: (date: Date) => boolean;
   getLayoutTitle: () => string;
+  getWeekStart: (date: Date) => Date;
 };
 
 export const CalendarContext = createContext<CalendarContext | undefined>(
