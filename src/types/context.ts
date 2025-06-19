@@ -34,6 +34,7 @@ type CalendarContext = {
   eventModalTime: string | undefined;
   eventModalDate: Date;
   handleTimeSlotClick: (date: Date, time: string) => void;
+  selectedDate: Date | null;
 };
 
 export const CalendarContext = createContext<CalendarContext | undefined>(

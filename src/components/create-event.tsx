@@ -4,13 +4,14 @@ import { useEvents } from "../hooks/useEvents";
 import { capitalizeWords } from "../utils/capilizeWords";
 
 const CreateEvent = () => {
-  const { eventModalTime, eventModalDate, toggleModal } = useCalendarContext();
-  const { addEvent, events } = useEvents();
+  const { eventModalTime, selectedDate, currentDate, toggleModal } =
+    useCalendarContext();
+  const { addEvent } = useEvents();
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState(eventModalTime || "09:00");
   const [endTime, setEndTime] = useState("10:00");
   const [description, setDescription] = useState("");
-
+  console.log({ selectedDate, currentDate });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -19,7 +20,7 @@ const CreateEvent = () => {
     const formattedText = capitalizeWords(title);
     console.log("🚀 Submitting event:", {
       title: formattedText,
-      date: eventModalDate,
+      date: currentDate,
       startTime,
       endTime,
       description: description.trim(),
@@ -27,7 +28,7 @@ const CreateEvent = () => {
 
     addEvent({
       title: formattedText,
-      date: eventModalDate,
+      date: selectedDate as Date,
       startTime,
       endTime,
       description: description.trim(),
@@ -61,10 +62,6 @@ const CreateEvent = () => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
-  // Debug: Log events when they change
-  useEffect(() => {
-    console.log("Events state updated in CreateEvent:", events);
-  }, [events]);
   return (
     <>
       <div className="fixed w-screen  bg-black/10 h-screen top-0" />
@@ -86,14 +83,17 @@ const CreateEvent = () => {
           <div>
             <p className="font-bold capitalize">date</p>
             <p className="text-gray-400">
-              {eventModalDate.toLocaleDateString("en-GB", {
+              {(selectedDate as Date).toLocaleDateString("en-GB", {
                 weekday: "long",
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
             </p>
-            <input type="hidden" value={eventModalDate.toDateString()} />
+            <input
+              type="hidden"
+              value={(selectedDate as Date).toDateString()}
+            />
           </div>
 
           <div className="flex gap-4">

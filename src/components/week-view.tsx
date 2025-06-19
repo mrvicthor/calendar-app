@@ -5,7 +5,7 @@ import { TIME_SLOTS } from "../utils";
 const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 const WeekView = () => {
-  const { getWeekStart, currentDate, isToday, toggleModal } =
+  const { getWeekStart, currentDate, isToday, toggleModal, handleDateClick } =
     useCalendarContext();
   const { events } = useEvents();
   const startDate = getWeekStart(currentDate);
@@ -56,7 +56,10 @@ const WeekView = () => {
               return (
                 <div
                   key={dayIndex}
-                  onClick={toggleModal}
+                  onClick={() => {
+                    handleDateClick(date);
+                    toggleModal();
+                  }}
                   className="border border-gray-200 cursor-pointer"
                 >
                   {dayEvents.map((event) => (

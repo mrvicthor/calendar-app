@@ -118,7 +118,6 @@ export const CalenderProvider = ({
 
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
-    setEventModalDate(date);
     setEventModalTime("09:00");
     if (layout === "Month") {
       setCurrentDate(date);
@@ -188,6 +187,7 @@ export const CalenderProvider = ({
         eventModalTime,
         eventModalDate,
         handleTimeSlotClick,
+        selectedDate,
       }}
     >
       {children}
