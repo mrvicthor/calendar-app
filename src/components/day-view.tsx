@@ -29,7 +29,7 @@ import { TIME_SLOTS } from "../utils";
 // ];
 
 const DayView = () => {
-  const { currentDate } = useCalendarContext();
+  const { currentDate, toggleLayout } = useCalendarContext();
   const date = new Date(currentDate);
   const currentDay = date.getDate();
   const minutesInDay = date.getHours() * 60 + date.getMinutes();
@@ -39,7 +39,7 @@ const DayView = () => {
   return (
     <>
       <div className="ml-24 grid grid-cols-7 gap-1">
-        <h2 className="text-xs text-blue-500 uppercase">
+        <h2 className="text-xs text-blue-500 uppercase pl-3">
           {currentDate.toLocaleDateString("en-GB", {
             weekday: "short",
           })}
@@ -54,13 +54,14 @@ const DayView = () => {
           </span>
         </div>
 
-        <ul className="flex-1 overflow-y-auto pl-12 relative">
+        <ul className="flex-1 overflow-y-auto pl-12 relative max-h-[calc(100vh-10rem)] overflow-x-hidden">
           <div
             style={{ top: `${topOffsetRem}rem` }}
             className="bg-red-400 absolute left-[5.5rem] w-full h-0.5 z-50"
           />
           {TIME_SLOTS.map((time, index) => (
             <li
+              onClick={toggleLayout}
               className="border-b border-gray-200 min-h-[3.125rem] flex relative"
               key={index}
             >

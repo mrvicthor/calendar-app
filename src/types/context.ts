@@ -29,6 +29,11 @@ type CalendarContext = {
   isNavigatedDate: (date: Date) => boolean;
   getLayoutTitle: () => string;
   getWeekStart: (date: Date) => Date;
+  toggleModal: () => void;
+  showForm: boolean;
+  eventModalTime: string | undefined;
+  eventModalDate: Date;
+  handleTimeSlotClick: (date: Date, time: string) => void;
 };
 
 export const CalendarContext = createContext<CalendarContext | undefined>(

@@ -2,7 +2,8 @@ import { useCalendarContext } from "../hooks/useCalendarContext";
 import { DAYS } from "../utils";
 
 const MonthView = () => {
-  const { calendarDays, isToday, isNavigatedDate } = useCalendarContext();
+  const { calendarDays, isToday, isNavigatedDate, handleDateClick } =
+    useCalendarContext();
   return (
     <section className="grid grid-cols-7 gap-0 h-full">
       {DAYS.map((day) => (
@@ -15,10 +16,11 @@ const MonthView = () => {
       ))}
       {calendarDays.map((dayInfo, index) => {
         const { date, day, isCurrentMonth } = dayInfo;
-        console.log(isCurrentMonth);
+
         return (
           <div
             key={index}
+            onClick={() => handleDateClick(date)}
             className="border-r-[1px] flex justify-center border-b border-b-[#DDE3E9] border-r-[#DDE3E9] last:border-r-0 min-h-[120px] p-1 cursor-pointer hover:bg-gray-50"
           >
             <p

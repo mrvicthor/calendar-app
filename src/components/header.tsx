@@ -14,6 +14,7 @@ const Header = () => {
     toggleLayout,
     showLayout,
     handleSelectLayout,
+    navigateMonth,
   } = useCalendarContext();
   const layoutOptions = [
     { id: 1, name: "Week" },
@@ -36,10 +37,16 @@ const Header = () => {
             today
           </button>{" "}
           <div className="flex items-center gap-1">
-            <button className="cursor-pointer h-8 w-8 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center">
+            <button
+              onClick={() => navigateMonth("prev")}
+              className="cursor-pointer h-8 w-8 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center"
+            >
               <MdArrowBackIos />
             </button>
-            <button className="cursor-pointer h-8 w-8 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center">
+            <button
+              onClick={() => navigateMonth("next")}
+              className="cursor-pointer h-8 w-8 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center"
+            >
               <MdArrowForwardIos />
             </button>
             <span className="hidden md:block">

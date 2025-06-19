@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <main className="grid [grid-template-columns:18rem_1fr] px-6 gap-4 h-[45rem]">
+      <main className="grid [grid-template-columns:18rem_1fr] px-6 gap-4 h-[90vh]">
         <Calendar />
         <Layout />
       </main>

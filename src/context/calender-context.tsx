@@ -16,6 +16,15 @@ export const CalenderProvider = ({
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [layout, setLayout] = useState<Layout>("Month");
   const [showLayout, setShowLayout] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [eventModalTime, setEventModalTime] = useState<string>();
+  const [eventModalDate, setEventModalDate] = useState<Date>(new Date());
+
+  const handleTimeSlotClick = (date: Date, time: string) => {
+    setEventModalTime(time);
+    setEventModalDate(date);
+    setShowForm(true);
+  };
 
   const today = new Date();
   const presentDay = today.getDate();
@@ -35,6 +44,8 @@ export const CalenderProvider = ({
   const daysFromNextMonth = totalCells - daysFromPreviousMonth - daysInMonth;
 
   const toggleCollapse = () => setIsCollapsed(!isCollapsed);
+
+  const toggleModal = () => setShowForm(!showForm);
 
   const navigateMonth = (direction: "prev" | "next") => {
     setCurrentDate((prevDate) => {
@@ -107,6 +118,12 @@ export const CalenderProvider = ({
 
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
+    setEventModalDate(date);
+    setEventModalTime("09:00");
+    toggleModal();
+    if (layout === "Month") {
+      setCurrentDate(date);
+    }
   };
 
   const handleSelectLayout = (value: Layout) => setLayout(value);
@@ -167,6 +184,11 @@ export const CalenderProvider = ({
         isNavigatedDate,
         getLayoutTitle,
         getWeekStart,
+        showForm,
+        toggleModal,
+        eventModalTime,
+        eventModalDate,
+        handleTimeSlotClick,
       }}
     >
       {children}
