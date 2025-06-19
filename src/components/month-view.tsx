@@ -1,5 +1,5 @@
 import { useCalendarContext } from "../hooks/useCalendarContext";
-import { useEvents } from "../hooks/useEvents";
+import { useEventsContext } from "../hooks/useEventsContext";
 import { DAYS } from "../utils";
 
 const MonthView = () => {
@@ -10,7 +10,7 @@ const MonthView = () => {
     handleDateClick,
     toggleModal,
   } = useCalendarContext();
-  const { events } = useEvents();
+  const { events } = useEventsContext();
 
   const getEventsForDate = (date: Date) => {
     return events.filter(

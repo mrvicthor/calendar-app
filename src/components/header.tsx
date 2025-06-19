@@ -62,7 +62,7 @@ const Header = () => {
         </nav>
       </header>
       {showLayout && (
-        <ul className="bg-[#E4E4E3] shadow-md py-4 fixed right-8 w-28 rounded-md flex flex-col gap-4 z-30">
+        <ul className="bg-[#E4E4E3] shadow-md py-4 fixed right-8 w-28 rounded-md flex flex-col gap-4 z-50">
           {layoutOptions.map((option) => (
             <li
               className="hover:bg-[#ECFCFC] cursor-pointer px-4 py-2"

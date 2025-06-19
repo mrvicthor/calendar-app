@@ -1,10 +1,11 @@
 import { useCalendarContext } from "../hooks/useCalendarContext";
-import { useEvents } from "../hooks/useEvents";
+
+import { useEventsContext } from "../hooks/useEventsContext";
 import { TIME_SLOTS } from "../utils";
 
 const DayView = () => {
   const { currentDate, toggleModal, handleDateClick } = useCalendarContext();
-  const { events, getEventsForDate } = useEvents();
+  const { getEventsForDate } = useEventsContext();
   const date = new Date(currentDate);
   const currentDay = date.getDate();
 
@@ -15,7 +16,6 @@ const DayView = () => {
 
   const topOffsetRem = (minutesInDay * 3.125) / 60;
 
-  // Get events for the current viewed date
   const dayEvents = getEventsForDate(date);
   console.log(`🔍 DayView - Events for ${date.toDateString()}:`, dayEvents);
 
@@ -55,7 +55,7 @@ const DayView = () => {
             {isToday && (
               <div
                 style={{ top: `${topOffsetRem}rem` }}
-                className="bg-red-400 absolute left-[4rem] w-full h-0.5 z-50"
+                className="bg-red-400 absolute left-[4rem] w-full h-0.5 z-40"
               />
             )}
             {TIME_SLOTS.map((time, index) => {

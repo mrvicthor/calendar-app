@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useCalendarContext } from "../hooks/useCalendarContext";
-import { useEvents } from "../hooks/useEvents";
 import { capitalizeWords } from "../utils/capilizeWords";
+import { useEventsContext } from "../hooks/useEventsContext";
 
 const CreateEvent = () => {
   const { eventModalTime, selectedDate, currentDate, toggleModal } =
     useCalendarContext();
-  const { addEvent, events } = useEvents();
+  const { addEvent, events } = useEventsContext();
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState(eventModalTime || "09:00");
   const [endTime, setEndTime] = useState("10:00");

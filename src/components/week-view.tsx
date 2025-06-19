@@ -1,5 +1,5 @@
 import { useCalendarContext } from "../hooks/useCalendarContext";
-import { useEvents } from "../hooks/useEvents";
+import { useEventsContext } from "../hooks/useEventsContext";
 import { TIME_SLOTS } from "../utils";
 
 const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -7,7 +7,7 @@ const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const WeekView = () => {
   const { getWeekStart, currentDate, isToday, toggleModal, handleDateClick } =
     useCalendarContext();
-  const { events } = useEvents();
+  const { events } = useEventsContext();
   const startDate = getWeekStart(currentDate);
   const weekDates = Array.from({ length: 7 }, (_, i) => {
     const date = new Date(startDate);
