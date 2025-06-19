@@ -14,7 +14,7 @@ export const CalenderProvider = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [layout, setLayout] = useState<Layout>("Week");
+  const [layout, setLayout] = useState<Layout>("Month");
   const [showLayout, setShowLayout] = useState(false);
 
   const today = new Date();

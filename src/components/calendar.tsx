@@ -75,9 +75,7 @@ const Calendar = () => {
                   isSelected(date) &&
                   !isToday(date) &&
                   "bg-gray-200 hover:bg-gray-300"
-                } ${isCurrentMonth && "text-gray-900"} ${
-                  isNavigatedDate(date) && "bg-[#ECFCFC]"
-                } `}
+                }  ${isNavigatedDate(date) && "bg-[#ECFCFC]"} `}
               >
                 {day}
               </button>

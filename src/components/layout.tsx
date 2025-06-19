@@ -1,15 +1,18 @@
-// import { useCalendarContext } from "../hooks/useCalendarContext";
+import { useCalendarContext } from "../hooks/useCalendarContext";
 
 import DayView from "./day-view";
+import MonthView from "./month-view";
 
 const Layout = () => {
-  // const { isToday, calendarDays, currentDate } = useCalendarContext();
+  const { isToday, calendarDays, currentDate, layout } = useCalendarContext();
 
   //   const currentWeek = [];
 
   return (
     <section className="pt-2 max-h-full bg-white overflow-hidden rounded-xl">
-      <DayView />
+      {layout === "Day" && <DayView />}
+      {layout === "Month" && <MonthView />}
+      {}
     </section>
   );
 };
