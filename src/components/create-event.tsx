@@ -4,9 +4,8 @@ import { capitalizeWords } from "../utils/capilizeWords";
 import { useEventsContext } from "../hooks/useEventsContext";
 
 const CreateEvent = () => {
-  const { eventModalTime, selectedDate, currentDate, toggleModal } =
-    useCalendarContext();
-  const { addEvent, events } = useEventsContext();
+  const { eventModalTime, selectedDate, toggleModal } = useCalendarContext();
+  const { addEvent } = useEventsContext();
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState(eventModalTime || "09:00");
   const [endTime, setEndTime] = useState("10:00");
@@ -18,13 +17,6 @@ const CreateEvent = () => {
     if (!title.trim()) return;
 
     const formattedText = capitalizeWords(title);
-    console.log("🚀 Submitting event:", {
-      title: formattedText,
-      date: currentDate,
-      startTime,
-      endTime,
-      description: description.trim(),
-    });
 
     addEvent({
       title: formattedText,
@@ -38,12 +30,6 @@ const CreateEvent = () => {
     setEndTime("10:00");
     setDescription("");
     toggleModal();
-
-    // Debug: Check localStorage after a short delay
-    setTimeout(() => {
-      const stored = localStorage.getItem("events");
-      console.log("localStorage after event creation:", stored);
-    }, 100);
   };
 
   const handleClose = () => {
@@ -61,11 +47,6 @@ const CreateEvent = () => {
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
-
-  // Debug: Log when events change
-  useEffect(() => {
-    console.log("📊 CreateEvent - Events state changed:", events.length);
-  }, [events]);
 
   return (
     <>
