@@ -120,7 +120,6 @@ export const CalenderProvider = ({
     setSelectedDate(date);
     setEventModalDate(date);
     setEventModalTime("09:00");
-    toggleModal();
     if (layout === "Month") {
       setCurrentDate(date);
     }

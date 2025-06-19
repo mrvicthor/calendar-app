@@ -22,7 +22,7 @@ const Calendar = () => {
     isToday,
     isSelected,
     navigateMonth,
-    toggleLayout,
+
     isNavigatedDate,
   } = useCalendarContext();
 
@@ -64,10 +64,7 @@ const Calendar = () => {
             return (
               <button
                 key={index}
-                onClick={() => {
-                  handleDateClick(date);
-                  toggleLayout();
-                }}
+                onClick={() => handleDateClick(date)}
                 className={`h-10 w-full rounded-full p-0 font-normal  text-sm cursor-pointer ${
                   !isCurrentMonth && "text-gray-400 hover:text-gray-600"
                 } ${
