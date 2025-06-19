@@ -6,12 +6,12 @@ import { capitalizeWords } from "../utils/capilizeWords";
 const CreateEvent = () => {
   const { eventModalTime, selectedDate, currentDate, toggleModal } =
     useCalendarContext();
-  const { addEvent } = useEvents();
+  const { addEvent, events } = useEvents();
   const [title, setTitle] = useState("");
   const [startTime, setStartTime] = useState(eventModalTime || "09:00");
   const [endTime, setEndTime] = useState("10:00");
   const [description, setDescription] = useState("");
-  console.log({ selectedDate, currentDate });
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -61,6 +61,11 @@ const CreateEvent = () => {
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
+
+  // Debug: Log when events change
+  useEffect(() => {
+    console.log("📊 CreateEvent - Events state changed:", events.length);
+  }, [events]);
 
   return (
     <>

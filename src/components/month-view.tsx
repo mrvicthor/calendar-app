@@ -1,9 +1,22 @@
 import { useCalendarContext } from "../hooks/useCalendarContext";
+import { useEvents } from "../hooks/useEvents";
 import { DAYS } from "../utils";
 
 const MonthView = () => {
-  const { calendarDays, isToday, isNavigatedDate, handleDateClick } =
-    useCalendarContext();
+  const {
+    calendarDays,
+    isToday,
+    isNavigatedDate,
+    handleDateClick,
+    toggleModal,
+  } = useCalendarContext();
+  const { events } = useEvents();
+
+  const getEventsForDate = (date: Date) => {
+    return events.filter(
+      (event) => event.date.toDateString() === date.toDateString()
+    );
+  };
   return (
     <section className="grid grid-cols-7 gap-0 h-full">
       {DAYS.map((day) => (
@@ -16,14 +29,17 @@ const MonthView = () => {
       ))}
       {calendarDays.map((dayInfo, index) => {
         const { date, day, isCurrentMonth } = dayInfo;
-
+        const dayEvents = getEventsForDate(date);
         return (
           <div
             key={index}
-            onClick={() => handleDateClick(date)}
-            className="border-r-[1px] flex justify-center border-b border-b-[#DDE3E9] border-r-[#DDE3E9] last:border-r-0 min-h-[120px] p-1 cursor-pointer hover:bg-gray-50"
+            onClick={() => {
+              toggleModal();
+              handleDateClick(date);
+            }}
+            className="border-r-[1px] flex flex-col gap-1 items-center border-b border-b-[#DDE3E9] border-r-[#DDE3E9] last:border-r-0 min-h-[120px] p-1 cursor-pointer hover:bg-gray-50"
           >
-            <p
+            <div
               className={`text-xs h-6 w-6 flex items-center justify-center rounded-full ${
                 isToday(date)
                   ? "bg-blue-500 text-white hover:bg-blue-600"
@@ -33,7 +49,23 @@ const MonthView = () => {
               } `}
             >
               {day}
-            </p>
+            </div>
+            <div className="space-y-1">
+              {dayEvents.slice(0, 3).map((event) => (
+                <div
+                  key={event.id}
+                  className="bg-blue-100 text-blue-900 text-xs p-1 rounded truncate"
+                  title={`${event.title} (${event.startTime} - ${event.endTime})`}
+                >
+                  {event.title}
+                </div>
+              ))}
+              {dayEvents.length > 3 && (
+                <div className="text-xs text-gray-500">
+                  +{dayEvents.length - 3} more
+                </div>
+              )}
+            </div>
           </div>
         );
       })}
