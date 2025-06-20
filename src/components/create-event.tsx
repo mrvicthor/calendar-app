@@ -22,6 +22,7 @@ const CreateEvent = () => {
     const end = timeToMinutes(endTime);
     if (start >= end) {
       setTimeError(true);
+      return;
     }
     addEvent({
       title: formattedText,
@@ -63,7 +64,7 @@ const CreateEvent = () => {
         onClick={(e) => e.stopPropagation()}
         className="sm:max-w-md w-[90vw] max-w-[40rem]  fixed top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] z-50 bg-white px-4 py-3 rounded-2xl space-y-4"
       >
-        <h2 className="capitalize font-bold">add event</h2>
+        <h2 className="capitalize font-bold text-2xl">add event</h2>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div>
             <input
@@ -99,7 +100,10 @@ const CreateEvent = () => {
                 type="time"
                 id="startTime"
                 value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
+                onChange={(e) => {
+                  setStartTime(e.target.value);
+                  setTimeError(false);
+                }}
                 className="border border-gray-300 px-2 py-1 rounded-md"
               />
             </div>
@@ -111,16 +115,19 @@ const CreateEvent = () => {
                 type="time"
                 id="endTime"
                 value={endTime}
-                onChange={(e) => setEndTime(e.target.value)}
+                onChange={(e) => {
+                  setEndTime(e.target.value);
+                  setTimeError(false);
+                }}
                 className="border border-gray-300 px-2 py-1 rounded-md"
               />
             </div>
-            {timeError && (
-              <span className="text-red-500" aria-live="polite">
-                Start time must be earlier than end time.
-              </span>
-            )}
           </div>
+          {timeError && (
+            <span className="text-red-500" aria-live="polite">
+              Start time must be earlier than end time.
+            </span>
+          )}
           <div className="flex flex-col">
             <label htmlFor="description" className="capitalize font-bold">
               description (optional)

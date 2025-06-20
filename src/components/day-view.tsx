@@ -5,7 +5,8 @@ import { TIME_SLOTS } from "../utils";
 
 const DayView = () => {
   const { currentDate, toggleModal, handleDateClick } = useCalendarContext();
-  const { getEventsForDate } = useEventsContext();
+  const { getEventsForDate, toggleEvent, handleSelectEvent } =
+    useEventsContext();
   const date = new Date(currentDate);
   const currentDay = date.getDate();
 
@@ -76,7 +77,11 @@ const DayView = () => {
                     {slotEvents.map((event) => (
                       <div
                         key={event.id}
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSelectEvent(event);
+                          toggleEvent();
+                        }}
                         className="bg-blue-100 border-l-4 border-blue-500 p-2  rounded text-sm group relative"
                       >
                         <div className="flex justify-between items-start">
@@ -87,11 +92,6 @@ const DayView = () => {
                             <div className="text-blue-700 text-xs">
                               {event.startTime} - {event.endTime}
                             </div>
-                            {/* {event.description && (
-                              <div className="text-blue-600 text-xs mt-1">
-                                {event.description}
-                              </div>
-                            )} */}
                           </div>
                         </div>
                       </div>

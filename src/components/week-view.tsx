@@ -7,7 +7,7 @@ const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const WeekView = () => {
   const { getWeekStart, currentDate, isToday, toggleModal, handleDateClick } =
     useCalendarContext();
-  const { events } = useEventsContext();
+  const { events, handleSelectEvent, toggleEvent } = useEventsContext();
   const startDate = getWeekStart(currentDate);
   const weekDates = Array.from({ length: 7 }, (_, i) => {
     const date = new Date(startDate);
@@ -34,7 +34,7 @@ const WeekView = () => {
             <div className="text-[#444746] text-xs pl-2">{days[index]}</div>
             <button
               onClick={() => handleDateClick(date)}
-              className={`h-10 w-10 rounded-full text-2xl font-medium flex items-center bg-red-400 justify-center cursor-pointer ${
+              className={`h-10 w-10 rounded-full text-2xl font-medium flex items-center justify-center cursor-pointer ${
                 isToday(date)
                   ? "bg-blue-500 text-white hover:bg-blue-600"
                   : "hover:bg-gray-100"
@@ -58,16 +58,24 @@ const WeekView = () => {
                 <div
                   key={dayIndex}
                   onClick={() => {
-                    handleDateClick(date);
                     toggleModal();
                   }}
-                  className="border border-gray-200 cursor-pointer"
+                  className="border border-gray-200 cursor-pointer relative"
                 >
-                  {dayEvents.map((event) => (
+                  {dayEvents.map((event, index) => (
                     <div
-                      className="bg-blue-100 border-l-2 border-blue-500 p-1 mb-1 rounded text-xs group relative"
+                      className="absolute left-0 right-0 bg-blue-100 border-l-2 border-blue-500 p-1 mb-1 rounded text-xs group overflow-hidden"
                       key={event.id}
-                      onClick={(e) => e.stopPropagation()}
+                      style={{
+                        top: `${index * 24}px`,
+                        height: "22px",
+                        zIndex: 10,
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelectEvent(event);
+                        toggleEvent();
+                      }}
                     >
                       <div className="flex justify-between items-start">
                         <div>
