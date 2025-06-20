@@ -189,6 +189,7 @@ export const CalenderProvider = ({
         eventModalDate,
         handleTimeSlotClick,
         selectedDate,
+        setSelectedDate,
       }}
     >
       {children}

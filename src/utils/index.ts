@@ -13,6 +13,7 @@ export const MONTHS = [
   "December",
 ];
 export const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+export const MOBILE_DAYS = ["S", "M", "T", "W", "T", "F", "S"];
 
 export const TIME_SLOTS = [
   "00:00",

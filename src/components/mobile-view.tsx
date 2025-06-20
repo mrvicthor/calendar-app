@@ -2,13 +2,14 @@ import { useCalendarContext } from "../hooks/useCalendarContext";
 import { useEventsContext } from "../hooks/useEventsContext";
 import { DAYS } from "../utils";
 
-const MonthView = () => {
+const MobileView = () => {
   const {
     calendarDays,
     isToday,
     isNavigatedDate,
     handleDateClick,
     toggleModal,
+    handleSelectLayout,
   } = useCalendarContext();
   const { events, handleSelectEvent, toggleEvent } = useEventsContext();
 
@@ -40,6 +41,7 @@ const MonthView = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 handleDateClick(date);
+                handleSelectLayout("Day");
               }}
               className={`text-xs h-6 w-6 flex items-center justify-center rounded-full ${
                 isToday(date)
@@ -79,4 +81,4 @@ const MonthView = () => {
   );
 };
 
-export default MonthView;
+export default MobileView;

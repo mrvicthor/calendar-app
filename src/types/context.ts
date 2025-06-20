@@ -35,6 +35,7 @@ type CalendarContext = {
   eventModalDate: Date;
   handleTimeSlotClick: (date: Date, time: string) => void;
   selectedDate: Date | null;
+  setSelectedDate: (value: React.SetStateAction<Date | null>) => void;
 };
 
 export const CalendarContext = createContext<CalendarContext | undefined>(

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import type { CalendarEvent } from "../types";
 import { EventsContext } from "../types/events";
+import mockEvents from "../mocks/mockEvents";
 
 export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -21,6 +22,9 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
         date: new Date(event.date),
       }));
       setEvents(withDates);
+    } else {
+      setEvents(mockEvents);
+      localStorage.setItem("events", JSON.stringify(mockEvents));
     }
   }, []);
 

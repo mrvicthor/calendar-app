@@ -2,6 +2,7 @@ import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 
 import { useCalendarContext } from "../hooks/useCalendarContext";
 import { MONTHS } from "../utils";
+import { useState } from "react";
 
 const days = [
   { id: 1, day: "S", tooltip: "Sunday" },
@@ -22,12 +23,12 @@ const Calendar = () => {
     isToday,
     isSelected,
     navigateMonth,
-
     isNavigatedDate,
   } = useCalendarContext();
 
+  const [hoveredId, setHoverId] = useState<number | null>(null);
   return (
-    <section>
+    <section className="hidden md:block">
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-3">
           <span>{MONTHS[currentMonth]}</span>
@@ -51,8 +52,15 @@ const Calendar = () => {
           {days.map((item) => (
             <div
               key={item.id}
-              className="text-center text-sm font-medium text-gray-500 py-2"
+              className="text-center text-sm font-medium text-gray-500 py-2 relative"
+              onMouseEnter={() => setHoverId(item.id)}
+              onMouseLeave={() => setHoverId(null)}
             >
+              {hoveredId === item.id && (
+                <p className="absolute -top-6 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded-md whitespace-nowrap z-10">
+                  {item.tooltip}
+                </p>
+              )}
               {item.day}
             </div>
           ))}
