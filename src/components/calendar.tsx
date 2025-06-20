@@ -1,4 +1,4 @@
-import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { MdArrowBackIos, MdArrowForwardIos, MdAdd } from "react-icons/md";
 
 import { useCalendarContext } from "../hooks/useCalendarContext";
 import { MONTHS } from "../utils";
@@ -24,12 +24,21 @@ const Calendar = () => {
     isSelected,
     navigateMonth,
     isNavigatedDate,
+    toggleModal,
   } = useCalendarContext();
 
   const [hoveredId, setHoverId] = useState<number | null>(null);
   return (
     <section className="hidden md:block">
       <div className="space-y-2">
+        <button
+          className="cursor-pointer py-2 px-4 bg-white shadow-lg rounded-2xl capitalize flex items items-center gap-2"
+          onClick={() => {
+            toggleModal();
+          }}
+        >
+          create <MdAdd />
+        </button>
         <div className="flex items-center justify-between gap-3">
           <span>{MONTHS[currentMonth]}</span>
           <span className="mr-auto">{currentYear}</span>{" "}
