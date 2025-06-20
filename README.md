@@ -1,54 +1,72 @@
-# React + TypeScript + Vite
+# React Calendar App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is a React-based calendar events application that allows users to create, view, and manage calendar events with time slots. It uses React Context API for state management, providing modular and maintainable code architecture.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Setup & Running Instructions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Clone the repository
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+git clone https://github.com/mrvicthor/calendar-app
+cd react-calendar-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+ npm install
 ```
+
+## Run the development server
+
+```sh
+npm run dev
+```
+
+## Run test
+
+```sh
+npx vitest
+```
+
+## Architecture & Design Decisions
+
+State Management:
+
+The app uses React's Context API combined with React's useState hooks to manage global calendar state (CalendarContext) and event data (EventsContext). This keeps state localized to relevant contexts, avoiding prop drilling while maintaining simple and performant updates.
+
+Component Structure:
+
+Components are organized by feature and responsibility. For example, the CreateEvent component handles event creation logic and UI, relying on context hooks to access and mutate shared state. This modular structure promotes reusability and testability.
+
+Time Handling:
+
+Time inputs and validation are managed with utility functions converting time strings to minutes for easy comparison, ensuring start times are always earlier than end times.
+
+Testing:
+
+Tests use React Testing Library with context providers mocked or implemented as test utilities, ensuring realistic behavior during UI interactions.
+
+## Known Issues, Limitations & Assumptions
+
+### Date & Time Validation:
+
+Currently, the app does not support timezone handling.
+
+### Performance:
+
+For very large event datasets, the current in-memory state and filtering logic may not scale well.
+
+### UI/UX:
+
+The UI is basic and may require improvements for accessibility and responsive design.
+
+### Assumptions:
+
+Users create events only for the current month view.
+
+Event IDs are generated locally and not persisted externally.
