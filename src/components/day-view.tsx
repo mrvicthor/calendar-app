@@ -18,7 +18,6 @@ const DayView = () => {
   const topOffsetRem = (minutesInDay * 3.125) / 60;
 
   const dayEvents = getEventsForDate(date);
-  console.log(`🔍 DayView - Events for ${date.toDateString()}:`, dayEvents);
 
   const getEventsForTimeSlot = (time: string) => {
     const slotEvents = dayEvents.filter((event) => {
