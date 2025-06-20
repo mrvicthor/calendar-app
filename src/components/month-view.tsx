@@ -9,6 +9,7 @@ const MonthView = () => {
     isNavigatedDate,
     handleDateClick,
     toggleModal,
+    setSelectedDate,
   } = useCalendarContext();
   const { events, handleSelectEvent, toggleEvent } = useEventsContext();
 
@@ -33,7 +34,10 @@ const MonthView = () => {
         return (
           <div
             key={index}
-            onClick={toggleModal}
+            onClick={() => {
+              toggleModal();
+              setSelectedDate(date);
+            }}
             className="border-r-[1px] flex flex-col gap-1 items-center border-b border-b-[#DDE3E9] border-r-[#DDE3E9] last:border-r-0 min-h-[120px] p-1 cursor-pointer hover:bg-gray-50"
           >
             <div

@@ -54,6 +54,8 @@ const CreateEvent = () => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
+  if (!selectedDate) return;
+
   return (
     <>
       <div

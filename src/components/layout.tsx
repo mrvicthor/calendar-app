@@ -20,7 +20,7 @@ const Layout = () => {
           {layout === "Month" && <MonthView />}
           {layout === "Week" && <WeekView />}
         </section>
-        <section className="">
+        <section className="md:hidden">
           {layout === "Day" ? <DayView /> : <MobileView />}
         </section>
         {showForm && createPortal(<CreateEvent />, document.body)}
