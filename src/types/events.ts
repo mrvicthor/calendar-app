@@ -6,6 +6,10 @@ type EventsContextType = {
   addEvent: (event: Omit<CalendarEvent, "id">) => void;
   getEventsForDate: (date: Date) => CalendarEvent[];
   getEventsForWeek: (startDate: Date) => CalendarEvent[];
+  viewEvent: boolean;
+  toggleEvent: () => void;
+  handleSelectEvent: (value: CalendarEvent) => void;
+  selectedEvent: CalendarEvent | null;
 };
 
 export const EventsContext = createContext<EventsContextType | undefined>(

@@ -119,8 +119,9 @@ export const CalenderProvider = ({
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
     setEventModalTime("09:00");
-    if (layout === "Month") {
+    if (layout !== "Day") {
       setCurrentDate(date);
+      setLayout("Day");
     }
   };
 

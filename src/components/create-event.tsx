@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCalendarContext } from "../hooks/useCalendarContext";
 import { capitalizeWords } from "../utils/capilizeWords";
 import { useEventsContext } from "../hooks/useEventsContext";
+import { timeToMinutes } from "../utils/timeToMinutes";
 
 const CreateEvent = () => {
   const { eventModalTime, selectedDate, toggleModal } = useCalendarContext();
@@ -10,14 +11,18 @@ const CreateEvent = () => {
   const [startTime, setStartTime] = useState(eventModalTime || "09:00");
   const [endTime, setEndTime] = useState("10:00");
   const [description, setDescription] = useState("");
-
+  const [timeError, setTimeError] = useState(false);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!title.trim()) return;
 
     const formattedText = capitalizeWords(title);
-
+    const start = timeToMinutes(startTime);
+    const end = timeToMinutes(endTime);
+    if (start >= end) {
+      setTimeError(true);
+    }
     addEvent({
       title: formattedText,
       date: selectedDate as Date,
@@ -50,7 +55,10 @@ const CreateEvent = () => {
 
   return (
     <>
-      <div className="fixed w-screen  bg-black/10 h-screen top-0" />
+      <div
+        className="fixed w-screen  bg-black/10 h-screen top-0"
+        onClick={toggleModal}
+      />
       <section
         onClick={(e) => e.stopPropagation()}
         className="sm:max-w-md w-[90vw] max-w-[40rem]  fixed top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] z-50 bg-white px-4 py-3 rounded-2xl space-y-4"
@@ -107,6 +115,11 @@ const CreateEvent = () => {
                 className="border border-gray-300 px-2 py-1 rounded-md"
               />
             </div>
+            {timeError && (
+              <span className="text-red-500" aria-live="polite">
+                Start time must be earlier than end time.
+              </span>
+            )}
           </div>
           <div className="flex flex-col">
             <label htmlFor="description" className="capitalize font-bold">

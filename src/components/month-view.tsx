@@ -33,13 +33,14 @@ const MonthView = () => {
         return (
           <div
             key={index}
-            onClick={() => {
-              toggleModal();
-              handleDateClick(date);
-            }}
+            onClick={toggleModal}
             className="border-r-[1px] flex flex-col gap-1 items-center border-b border-b-[#DDE3E9] border-r-[#DDE3E9] last:border-r-0 min-h-[120px] p-1 cursor-pointer hover:bg-gray-50"
           >
             <div
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDateClick(date);
+              }}
               className={`text-xs h-6 w-6 flex items-center justify-center rounded-full ${
                 isToday(date)
                   ? "bg-blue-500 text-white hover:bg-blue-600"

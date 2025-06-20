@@ -4,6 +4,13 @@ import { EventsContext } from "../types/events";
 
 export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [viewEvent, setViewEvent] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(
+    null
+  );
+
+  const toggleEvent = () => setViewEvent(!viewEvent);
+  const handleSelectEvent = (value: CalendarEvent) => setSelectedEvent(value);
 
   useEffect(() => {
     const eventsFromStorage = localStorage.getItem("events");
@@ -53,7 +60,16 @@ export const EventsProvider = ({ children }: { children: React.ReactNode }) => {
   };
   return (
     <EventsContext.Provider
-      value={{ events, addEvent, getEventsForDate, getEventsForWeek }}
+      value={{
+        events,
+        addEvent,
+        getEventsForDate,
+        getEventsForWeek,
+        viewEvent,
+        toggleEvent,
+        handleSelectEvent,
+        selectedEvent,
+      }}
     >
       {children}
     </EventsContext.Provider>

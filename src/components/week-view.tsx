@@ -33,7 +33,8 @@ const WeekView = () => {
           <div key={index} className="px-6 pb-2">
             <div className="text-[#444746] text-xs pl-2">{days[index]}</div>
             <button
-              className={`h-10 w-10 rounded-full text-2xl font-medium flex items-center justify-center cursor-pointer ${
+              onClick={() => handleDateClick(date)}
+              className={`h-10 w-10 rounded-full text-2xl font-medium flex items-center bg-red-400 justify-center cursor-pointer ${
                 isToday(date)
                   ? "bg-blue-500 text-white hover:bg-blue-600"
                   : "hover:bg-gray-100"
