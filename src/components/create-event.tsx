@@ -65,7 +65,11 @@ const CreateEvent = () => {
         className="sm:max-w-md w-[90vw] max-w-[40rem]  fixed top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] z-50 bg-white px-4 py-3 rounded-2xl space-y-4"
       >
         <h2 className="capitalize font-bold text-2xl">add event</h2>
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form
+          role="form"
+          className="flex flex-col gap-4"
+          onSubmit={handleSubmit}
+        >
           <div>
             <input
               type="text"
