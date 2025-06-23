@@ -9,18 +9,16 @@ const Layout = () => {
   const { layout } = useCalendarContext();
 
   return (
-    <>
-      <section className="pt-2 max-h-full bg-white overflow-hidden rounded-xl">
-        <section className="hidden md:block h-full">
-          {layout === "Day" && <DayView />}
-          {layout === "Month" && <MonthView />}
-          {layout === "Week" && <WeekView />}
-        </section>
-        <section className="md:hidden h-full">
-          {layout === "Day" ? <DayView /> : <MobileView />}
-        </section>
+    <section className="pt-2 bg-white overflow-hidden rounded-xl h-full">
+      <section className="hidden md:block h-full">
+        {layout === "Day" && <DayView />}
+        {layout === "Month" && <MonthView />}
+        {layout === "Week" && <WeekView />}
       </section>
-    </>
+      <section className="md:hidden h-full">
+        {layout === "Day" ? <DayView /> : <MobileView />}
+      </section>
+    </section>
   );
 };
 

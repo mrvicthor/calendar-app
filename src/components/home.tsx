@@ -12,15 +12,16 @@ const Home = () => {
   const { showForm } = useCalendarContext();
   const { viewEvent } = useEventsContext();
   return (
-    <>
+    <main className="h-dvh px-6">
       <Header />
-      <main className="grid md:[grid-template-columns:18rem_1fr] px-6 gap-4 h-[90vh]">
+      <section className="grid md:[grid-template-columns:18rem_1fr]  gap-4">
         <Calendar />
         <Layout />
-        {showForm && createPortal(<CreateEvent />, document.body)}
-        {viewEvent && createPortal(<EventModal />, document.body)}
-      </main>
-    </>
+      </section>
+
+      {showForm && createPortal(<CreateEvent />, document.body)}
+      {viewEvent && createPortal(<EventModal />, document.body)}
+    </main>
   );
 };
 

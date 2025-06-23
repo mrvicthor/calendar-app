@@ -31,7 +31,7 @@ const DayView = () => {
   return (
     <>
       <div className="ml-24 grid grid-cols-7 gap-1">
-        <h2 className="text-xs text-blue-500 uppercase pl-3">
+        <h2 className="text-xs text-blue-500 uppercase pl-7">
           {date.toLocaleDateString("en-GB", {
             weekday: "short",
           })}
@@ -50,7 +50,7 @@ const DayView = () => {
           </span>
         </div>
 
-        <div className="flex-1 overflow-y-auto pl-12 relative max-h-[calc(100vh-10rem)] overflow-x-hidden">
+        <div className="flex-1 overflow-y-auto pl-12 relative max-h-[calc(100vh-14rem)] overflow-x-hidden">
           <div className="grid grid-cols-1 relative">
             {isToday && (
               <div

@@ -110,13 +110,23 @@ export const CalenderProvider = ({
     );
   };
 
+  const isSameWeek = (day1: Date, day2: Date) => {
+    return getWeekStart(day1).getTime() === getWeekStart(day2).getTime();
+  };
+
   const handleDateClick = (date: Date) => {
-    setSelectedDate(date);
-    setEventModalTime("09:00");
-    if (layout !== "Day") {
-      setCurrentDate(date);
-      setLayout("Day");
-    }
+    setCurrentDate((prevDate) => {
+      const newDate = new Date(prevDate);
+      if (layout === "Day") {
+        newDate.setDate(date.getDate());
+      } else if (layout === "Week" || layout === "Month") {
+        console.log("here");
+        if (!isSameWeek(prevDate, date) || !isSameMonth(date)) {
+          newDate.setTime(date.getTime());
+        }
+      }
+      return newDate;
+    });
   };
 
   const handleSelectLayout = (value: Layout) => setLayout(value);

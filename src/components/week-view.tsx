@@ -26,12 +26,15 @@ const WeekView = () => {
   };
   return (
     <section className="h-full">
-      <div className="ml-16 grid grid-cols-8 gap-0">
-        <div className="w-20 p-2" />
+      <div className="grid grid-cols-8 gap-0">
+        <div className="w-full p-2 " />
 
         {weekDates.map((date, index) => (
-          <div key={index} className="px-6 pb-2">
-            <div className="text-[#444746] text-xs pl-2">{days[index]}</div>
+          <div
+            key={index}
+            className=" pb-2 flex flex-col justify-center items-center"
+          >
+            <div className="text-[#444746] text-xs">{days[index]}</div>
             <button
               onClick={() => handleDateClick(date)}
               className={`h-10 w-10 rounded-full text-2xl font-medium flex items-center justify-center cursor-pointer ${
@@ -46,7 +49,7 @@ const WeekView = () => {
           </div>
         ))}
       </div>
-      <div className="flex flex-col overflow-y-auto max-h-[calc(100vh-10rem)] ">
+      <div className="flex flex-col overflow-y-auto max-h-[calc(100dvh-14rem)]">
         {TIME_SLOTS.map((time, index) => (
           <div key={index} className="grid grid-cols-8  min-h-[3.125rem]">
             <span className=" text-xs text-right -top-2 relative z-20 px-2">

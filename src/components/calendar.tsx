@@ -32,7 +32,7 @@ const Calendar = () => {
     <section className="hidden md:block">
       <div className="space-y-2">
         <button
-          className="cursor-pointer py-2 px-4 bg-white shadow-lg rounded-2xl capitalize flex items items-center gap-2"
+          className="cursor-pointer py-2 px-4 bg-white shadow-lg hover:bg-[#ECFCFC] rounded-2xl capitalize flex items items-center gap-2"
           onClick={() => {
             toggleModal();
           }}
@@ -82,7 +82,7 @@ const Calendar = () => {
               <button
                 key={index}
                 onClick={() => handleDateClick(date)}
-                className={`h-10 w-full rounded-full p-0 font-normal  text-sm cursor-pointer ${
+                className={`h-10 w-full rounded-full p-0 font-normal  text-sm cursor-pointer border border-amber-400 ${
                   !isCurrentMonth && "text-gray-400 hover:text-gray-600"
                 } ${
                   isToday(date)
