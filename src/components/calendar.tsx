@@ -82,7 +82,7 @@ const Calendar = () => {
               <button
                 key={index}
                 onClick={() => handleDateClick(date)}
-                className={`h-10 w-full rounded-full p-0 font-normal  text-sm cursor-pointer border border-amber-400 ${
+                className={`h-10 w-full rounded-full p-0 font-normal  text-sm cursor-pointer ${
                   !isCurrentMonth && "text-gray-400 hover:text-gray-600"
                 } ${
                   isToday(date)

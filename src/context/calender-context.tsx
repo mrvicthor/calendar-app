@@ -120,7 +120,6 @@ export const CalenderProvider = ({
       if (layout === "Day") {
         newDate.setDate(date.getDate());
       } else if (layout === "Week" || layout === "Month") {
-        console.log("here");
         if (!isSameWeek(prevDate, date) || !isSameMonth(date)) {
           newDate.setTime(date.getTime());
         }
