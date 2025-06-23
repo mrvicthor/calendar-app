@@ -67,6 +67,4 @@ The UI is basic and may require improvements for accessibility and responsive de
 
 ### Assumptions:
 
-Users create events only for the current month view.
-
 Event IDs are generated locally and not persisted externally.
