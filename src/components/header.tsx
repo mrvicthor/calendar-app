@@ -5,6 +5,7 @@ import {
   MdAdd,
 } from "react-icons/md";
 import { FaCaretDown } from "react-icons/fa6";
+import { TbArrowBackUp } from "react-icons/tb";
 import { useCalendarContext } from "../hooks/useCalendarContext";
 import type { Layout } from "../types/context";
 
@@ -32,12 +33,14 @@ const Header = () => {
     <>
       <header className="px-4 h-18">
         <nav className="flex items-center justify-between h-full gap-3">
-          <button
-            onClick={() => handleSelectLayout("Month")}
-            className="md:hidden"
-          >
-            <MdArrowBackIos />
-          </button>
+          {layout === "Day" && (
+            <button
+              onClick={() => handleSelectLayout("Month")}
+              className="md:hidden"
+            >
+              <TbArrowBackUp />
+            </button>
+          )}
           <button>
             <MdMenu size={24} />
           </button>
