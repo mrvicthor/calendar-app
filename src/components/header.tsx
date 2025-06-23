@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="px-4 h-18">
+      <header className="h-18">
         <nav className="flex items-center justify-between h-full gap-3">
           {layout === "Day" && (
             <button
