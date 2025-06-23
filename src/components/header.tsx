@@ -38,7 +38,7 @@ const Header = () => {
               onClick={() => handleSelectLayout("Month")}
               className="md:hidden"
             >
-              <TbArrowBackUp />
+              <TbArrowBackUp size={24} />
             </button>
           )}
           <button>
