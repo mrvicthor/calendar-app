@@ -68,13 +68,7 @@ export const CalenderProvider = ({
   };
 
   const getLayoutTitle = () => {
-    if (layout === "Day") {
-      return currentDate.toLocaleDateString("en-GB", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    } else if (layout === "Week") {
+    if (layout === "Week") {
       const weekStart = getWeekStart(currentDate);
       const weekEnd = new Date(weekStart);
       weekEnd.setDate(weekStart.getDate() + 6);

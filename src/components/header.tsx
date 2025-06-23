@@ -20,6 +20,7 @@ const Header = () => {
     navigateMonth,
     toggleModal,
     setSelectedDate,
+    getLayoutTitle,
   } = useCalendarContext();
   const layoutOptions = [
     { id: 1, name: "Week" },
@@ -40,15 +41,17 @@ const Header = () => {
           <button>
             <MdMenu size={24} />
           </button>
-          <span>{presentDay}</span>{" "}
-          <span className="capitalize mr-auto">calendar</span>{" "}
+          <span className="h-8 w-8 rounded-full flex items-center justify-center border-2 border-blue-500">
+            {presentDay}
+          </span>{" "}
+          <span className="capitalize">{getLayoutTitle()}</span>{" "}
           <button
             onClick={navigateToToday}
-            className="h-10 w-[6rem] hidden md:block rounded-3xl cursor-pointer border capitalize hover:bg-[#ECF4F4]"
+            className="h-10 w-[6rem] hidden md:block rounded-3xl cursor-pointer border capitalize hover:bg-[#ECF4F4] ml-auto"
           >
             today
           </button>{" "}
-          <div className="flex items-center gap-1 mr-auto">
+          <div className="flex items-center gap-1">
             <button
               onClick={() => navigateMonth("prev")}
               className="cursor-pointer h-7 w-7 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center"
@@ -61,12 +64,6 @@ const Header = () => {
             >
               <MdArrowForwardIos />
             </button>
-            <span className="">
-              {currentDate.toLocaleDateString("en-GB", {
-                month: "long",
-                year: "numeric",
-              })}
-            </span>
           </div>
           <button
             onClick={() => {
