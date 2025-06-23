@@ -15,7 +15,6 @@ vi.mock("../hooks/useCalendarContext", () => ({
 }));
 
 describe("CreateEvent", () => {
-  // Create a minimal events context value
   const eventsContextValue = {
     addEvent: mockAddEvent,
     getEventsForDate: vi.fn(() => []),
@@ -106,7 +105,6 @@ describe("CreateEvent", () => {
   it("clears time error when time inputs are changed", () => {
     renderComponent();
 
-    // First create the error
     fireEvent.change(screen.getByPlaceholderText(/add title/i), {
       target: { value: "Test Event" },
     });
@@ -122,7 +120,6 @@ describe("CreateEvent", () => {
       screen.getByText(/start time must be earlier than end time/i)
     ).toBeInTheDocument();
 
-    // Then fix the time and verify error is cleared
     fireEvent.change(screen.getByLabelText(/end time/i), {
       target: { value: "11:00" },
     });
