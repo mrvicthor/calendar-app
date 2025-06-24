@@ -149,12 +149,14 @@ const CreateEvent = () => {
           <div className="flex items-center gap-3 justify-end">
             <button
               onClick={handleClose}
+              aria-label="cancel"
               className="py-2 px-3 border border-gray-300 text-black capitalize rounded-lg cursor-pointer"
             >
               cancel
             </button>
             <button
               type="submit"
+              aria-label="submit"
               disabled={!title}
               className="py-2 px-3 bg-blue-400 capitalize rounded-lg text-white disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >

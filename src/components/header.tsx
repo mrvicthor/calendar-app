@@ -37,11 +37,12 @@ const Header = () => {
             <button
               onClick={() => handleSelectLayout("Month")}
               className="md:hidden"
+              aria-label="back"
             >
               <TbArrowBackUp size={24} />
             </button>
           )}
-          <button>
+          <button aria-label="menu">
             <MdMenu size={24} />
           </button>
           <span className="h-8 w-8 rounded-full flex items-center justify-center border-2 border-blue-500">
@@ -49,6 +50,7 @@ const Header = () => {
           </span>{" "}
           <span className="capitalize">{getLayoutTitle()}</span>{" "}
           <button
+            aria-label="today"
             onClick={navigateToToday}
             className="h-10 w-[6rem] hidden md:block rounded-3xl cursor-pointer border capitalize hover:bg-[#ECF4F4] ml-auto"
           >
@@ -56,12 +58,14 @@ const Header = () => {
           </button>{" "}
           <div className="flex items-center gap-1">
             <button
+              aria-label="previous"
               onClick={() => navigateMonth("prev")}
               className="cursor-pointer h-7 w-7 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center"
             >
               <MdArrowBackIos />
             </button>
             <button
+              aria-label="next"
               onClick={() => navigateMonth("next")}
               className="cursor-pointer h-7 w-7 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center"
             >
@@ -73,11 +77,13 @@ const Header = () => {
               toggleModal();
               setSelectedDate(currentDate);
             }}
+            aria-label="create event"
             className="cursor-pointer md:hidden"
           >
             <MdAdd />
           </button>
           <button
+            aria-label={layout}
             onClick={toggleLayout}
             className="h-10 w-[6rem] rounded-3xl cursor-pointer border capitalize hover:bg-[#ECF4F4] md:flex items-center justify-center gap-2 hidden"
           >

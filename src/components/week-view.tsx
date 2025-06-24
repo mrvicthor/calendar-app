@@ -36,6 +36,7 @@ const WeekView = () => {
           >
             <div className="text-[#444746] text-xs">{days[index]}</div>
             <button
+              aria-label={date.getDate().toString()}
               onClick={() => handleDateClick(date)}
               className={`h-10 w-10 rounded-full text-2xl font-medium flex items-center justify-center cursor-pointer ${
                 isToday(date)

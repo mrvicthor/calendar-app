@@ -13,6 +13,7 @@ const EventModal = () => {
         <div className="flex justify-end">
           <button
             onClick={toggleEvent}
+            aria-label="close"
             className="h-8 w-8 rounded-full flex items-center cursor-pointer justify-center hover:bg-[#ECF4F4]"
           >
             <MdClose size={20} />

@@ -32,6 +32,7 @@ const Calendar = () => {
     <section className="hidden md:block">
       <div className="space-y-2">
         <button
+          aria-label="create event"
           className="cursor-pointer py-2 px-4 bg-white shadow-lg hover:bg-[#ECFCFC] rounded-2xl capitalize flex items items-center gap-2"
           onClick={() => {
             toggleModal();
@@ -45,12 +46,14 @@ const Calendar = () => {
           <div className="flex items-center gap-1">
             <button
               onClick={() => navigateMonth("prev")}
+              aria-label="previous"
               className="cursor-pointer h-8 w-8 rounded-full hover:bg-[#ECF4F4] flex items-center justify-center"
             >
               <MdArrowBackIos size={14} />
             </button>
             <button
               onClick={() => navigateMonth("next")}
+              aria-label="next"
               className="cursor-pointer h-8 w-8 rounded-full flex items-center justify-center hover:bg-[#ECF4F4]"
             >
               <MdArrowForwardIos size={14} />
@@ -82,6 +85,7 @@ const Calendar = () => {
               <button
                 key={index}
                 onClick={() => handleDateClick(date)}
+                aria-label="day"
                 className={`h-10 w-full rounded-full p-0 font-normal  text-sm cursor-pointer ${
                   !isCurrentMonth && "text-gray-400 hover:text-gray-600"
                 } ${
