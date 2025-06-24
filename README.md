@@ -12,7 +12,7 @@ This is a React-based calendar events application that allows users to create, v
 
 ```sh
 git clone https://github.com/mrvicthor/calendar-app
-cd react-calendar-app
+cd calendar-app
 ```
 
 ### install dependencies
