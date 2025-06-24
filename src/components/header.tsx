@@ -52,11 +52,11 @@ const Header = () => {
           <button
             aria-label="today"
             onClick={navigateToToday}
-            className="h-10 w-[6rem] hidden md:block rounded-3xl cursor-pointer border capitalize hover:bg-[#ECF4F4] ml-auto"
+            className="h-10 w-[6rem] rounded-3xl cursor-pointer border capitalize hover:bg-[#ECF4F4] ml-auto"
           >
             today
           </button>{" "}
-          <div className="flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1">
             <button
               aria-label="previous"
               onClick={() => navigateMonth("prev")}
