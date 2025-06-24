@@ -5,8 +5,13 @@ import { TIME_SLOTS } from "../utils";
 const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 const WeekView = () => {
-  const { getWeekStart, currentDate, isToday, toggleModal, handleDateClick } =
-    useCalendarContext();
+  const {
+    getWeekStart,
+    currentDate,
+    isToday,
+    toggleModal,
+    handleViewDateClick,
+  } = useCalendarContext();
   const { events, handleSelectEvent, toggleEvent } = useEventsContext();
   const startDate = getWeekStart(currentDate);
   const weekDates = Array.from({ length: 7 }, (_, i) => {
@@ -37,7 +42,7 @@ const WeekView = () => {
             <div className="text-[#444746] text-xs">{days[index]}</div>
             <button
               aria-label={date.getDate().toString()}
-              onClick={() => handleDateClick(date)}
+              onClick={() => handleViewDateClick(date)}
               className={`h-10 w-10 rounded-full text-2xl font-medium flex items-center justify-center cursor-pointer ${
                 isToday(date)
                   ? "bg-blue-500 text-white hover:bg-blue-600"

@@ -114,6 +114,14 @@ export const CalenderProvider = ({
     return getWeekStart(day1).getTime() === getWeekStart(day2).getTime();
   };
 
+  const handleViewDateClick = (date: Date) => {
+    setSelectedDate(date);
+    if (layout !== "Day") {
+      setCurrentDate(date);
+      setLayout("Day");
+    }
+  };
+
   const handleDateClick = (date: Date) => {
     setCurrentDate((prevDate) => {
       const newDate = new Date(prevDate);
@@ -193,6 +201,7 @@ export const CalenderProvider = ({
         handleTimeSlotClick,
         selectedDate,
         setSelectedDate,
+        handleViewDateClick,
       }}
     >
       {children}

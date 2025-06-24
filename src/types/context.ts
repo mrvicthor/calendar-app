@@ -36,6 +36,7 @@ type CalendarContext = {
   handleTimeSlotClick: (date: Date, time: string) => void;
   selectedDate: Date | null;
   setSelectedDate: (value: React.SetStateAction<Date | null>) => void;
+  handleViewDateClick: (date: Date) => void;
 };
 
 export const CalendarContext = createContext<CalendarContext | undefined>(

@@ -7,9 +7,9 @@ const MonthView = () => {
     calendarDays,
     isToday,
     isNavigatedDate,
-    handleDateClick,
     toggleModal,
     setSelectedDate,
+    handleViewDateClick,
   } = useCalendarContext();
   const { events, handleSelectEvent, toggleEvent } = useEventsContext();
 
@@ -46,7 +46,7 @@ const MonthView = () => {
               <div
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleDateClick(date);
+                  handleViewDateClick(date);
                 }}
                 className={`text-xs h-6 w-6 flex items-center justify-center rounded-full ${
                   isToday(date)
