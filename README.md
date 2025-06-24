@@ -33,6 +33,10 @@ npm run dev
 npx vitest
 ```
 
+## Screenshot - Lighthouse Report
+
+![](./lighthouse-report.png)
+
 ## Architecture & Design Decisions
 
 State Management:
