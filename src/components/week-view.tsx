@@ -36,8 +36,9 @@ const WeekView = () => {
   const minutesInDay = isToday(currentDate)
     ? now.getHours() * 60 + now.getMinutes()
     : 0;
-  const slotHeight = 50;
+  const slotHeight = 60;
   const topOffsetRem = (minutesInDay * 3.125) / slotHeight;
+  console.log({ topOffsetRem });
 
   return (
     <section className="h-full">
