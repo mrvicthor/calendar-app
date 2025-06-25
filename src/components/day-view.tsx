@@ -3,6 +3,7 @@ import { useCalendarContext } from "../hooks/useCalendarContext";
 import { useEventsContext } from "../hooks/useEventsContext";
 import { TIME_SLOTS } from "../utils";
 import { getEventDurationInMinutes } from "../utils/getEventDurationInMinutes";
+import { getMinutesFromStartTime } from "../utils/getMinutesFromStartTime";
 
 const DayView = () => {
   const { currentDate, toggleModal, handleDateClick } = useCalendarContext();
@@ -30,6 +31,7 @@ const DayView = () => {
   };
 
   const slotEventHeight = 50;
+
   return (
     <>
       <div className="ml-24 grid grid-cols-7 gap-1">
@@ -81,11 +83,13 @@ const DayView = () => {
                         event.startTime,
                         event.endTime
                       );
+
                       const height = (durationInMinutes / 60) * slotEventHeight;
+                      const top = getMinutesFromStartTime(event.startTime);
 
                       return (
                         <div
-                          style={{ height: `${height + 5}px` }}
+                          style={{ height: `${height + 5}px`, top: `${top}px` }}
                           key={event.id}
                           onClick={(e) => {
                             e.stopPropagation();
