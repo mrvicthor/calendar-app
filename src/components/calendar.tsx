@@ -33,12 +33,12 @@ const Calendar = () => {
       <div className="space-y-2">
         <button
           aria-label="create event"
-          className="cursor-pointer py-2 px-4 bg-white shadow-lg hover:bg-[#ECFCFC] rounded-2xl capitalize flex items items-center gap-2"
+          className="cursor-pointer py-3 px-4 bg-white shadow-lg hover:bg-[#ECFCFC] rounded-2xl capitalize flex items items-center gap-2"
           onClick={() => {
             toggleModal();
           }}
         >
-          create <MdAdd />
+          create event <MdAdd />
         </button>
         <div className="flex items-center justify-between gap-3">
           <span>{MONTHS[currentMonth]}</span>
