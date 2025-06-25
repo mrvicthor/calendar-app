@@ -1,6 +1,7 @@
 import { useCalendarContext } from "../hooks/useCalendarContext";
 import { useEventsContext } from "../hooks/useEventsContext";
 import { TIME_SLOTS } from "../utils";
+import { timeToMinutes } from "../utils/timeToMinutes";
 
 const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -29,6 +30,15 @@ const WeekView = () => {
       );
     });
   };
+
+  const now = new Date();
+
+  const minutesInDay = isToday(currentDate)
+    ? now.getHours() * 60 + now.getMinutes()
+    : 0;
+  const slotHeight = 50;
+  const topOffsetRem = (minutesInDay * 3.125) / slotHeight;
+
   return (
     <section className="h-full">
       <div className="grid grid-cols-8 gap-0">
@@ -63,6 +73,14 @@ const WeekView = () => {
             </span>
             {weekDates.map((date, dayIndex) => {
               const dayEvents = getEventsForDateAndTime(date, time);
+              const slotMinutes = timeToMinutes(time);
+              const nextSlotMinutes = timeToMinutes(
+                TIME_SLOTS[index + 1] || "24:00"
+              );
+              const isCurrentTimeSlot =
+                isToday(date) &&
+                slotMinutes <= minutesInDay &&
+                nextSlotMinutes > minutesInDay;
               return (
                 <div
                   key={dayIndex}
@@ -71,6 +89,12 @@ const WeekView = () => {
                   }}
                   className="border border-gray-200 cursor-pointer relative"
                 >
+                  {isCurrentTimeSlot && (
+                    <div
+                      style={{ top: `${topOffsetRem}px` }}
+                      className="bg-red-400 absolute left-0 w-full h-0.5 z-40 transition-all duration-500 ease-in-out"
+                    />
+                  )}
                   {dayEvents.map((event, index) => (
                     <div
                       className="absolute left-0 right-0 bg-blue-100 border-l-2 border-blue-500 p-1 mb-1 rounded text-xs group overflow-hidden"

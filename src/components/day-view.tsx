@@ -55,7 +55,7 @@ const DayView = () => {
             {isToday && (
               <div
                 style={{ top: `${topOffsetRem}rem` }}
-                className="bg-red-400 absolute left-[4rem] w-full h-0.5 z-40"
+                className="bg-red-400 absolute left-[4rem] w-full h-0.5 z-40 transition-all duration-500 ease-in-out"
               />
             )}
             {TIME_SLOTS.map((time, index) => {
@@ -81,7 +81,7 @@ const DayView = () => {
                           handleSelectEvent(event);
                           toggleEvent();
                         }}
-                        className="bg-blue-100 border-l-4 border-blue-500 p-2  rounded text-sm group relative"
+                        className="bg-blue-100 border-l-4 border-blue-500 p-2 rounded text-sm group relative"
                       >
                         <div className="flex justify-between items-start">
                           <div>
