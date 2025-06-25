@@ -36,9 +36,8 @@ const WeekView = () => {
   const minutesInDay = isToday(currentDate)
     ? now.getHours() * 60 + now.getMinutes()
     : 0;
-  const slotHeight = 60;
+  const slotHeight = 50;
   const topOffsetRem = (minutesInDay * 3.125) / slotHeight;
-  console.log({ topOffsetRem });
 
   return (
     <section className="h-full">
@@ -76,7 +75,7 @@ const WeekView = () => {
               const dayEvents = getEventsForDateAndTime(date, time);
               const slotMinutes = timeToMinutes(time);
               const nextSlotMinutes = timeToMinutes(
-                TIME_SLOTS[index + 1] || "24:00"
+                TIME_SLOTS[index + 1] || "23:00"
               );
               const isCurrentTimeSlot =
                 isToday(date) &&
@@ -92,7 +91,7 @@ const WeekView = () => {
                 >
                   {isCurrentTimeSlot && (
                     <div
-                      style={{ top: `${topOffsetRem}px` }}
+                      style={{ top: `${topOffsetRem - slotHeight}px` }}
                       className="bg-red-400 absolute left-0 w-full h-0.5 z-40 transition-all duration-500 ease-in-out"
                     />
                   )}
