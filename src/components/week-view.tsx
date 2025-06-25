@@ -13,10 +13,8 @@ const WeekView = () => {
     toggleModal,
     handleViewDateClick,
     setSelectedDate,
-    selectedDate,
   } = useCalendarContext();
 
-  console.log({ selectedDate });
   const { events, handleSelectEvent, toggleEvent } = useEventsContext();
   const startDate = getWeekStart(currentDate);
   const weekDates = Array.from({ length: 7 }, (_, i) => {
