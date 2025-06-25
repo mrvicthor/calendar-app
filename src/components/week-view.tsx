@@ -12,7 +12,11 @@ const WeekView = () => {
     isToday,
     toggleModal,
     handleViewDateClick,
+    setSelectedDate,
+    selectedDate,
   } = useCalendarContext();
+
+  console.log({ selectedDate });
   const { events, handleSelectEvent, toggleEvent } = useEventsContext();
   const startDate = getWeekStart(currentDate);
   const weekDates = Array.from({ length: 7 }, (_, i) => {
@@ -94,6 +98,7 @@ const WeekView = () => {
                   key={dayIndex}
                   onClick={() => {
                     toggleModal();
+                    setSelectedDate(date);
                   }}
                   className="border border-gray-200 cursor-pointer relative"
                 >
