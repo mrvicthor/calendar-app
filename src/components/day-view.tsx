@@ -2,6 +2,7 @@ import { useCalendarContext } from "../hooks/useCalendarContext";
 
 import { useEventsContext } from "../hooks/useEventsContext";
 import { TIME_SLOTS } from "../utils";
+import { getEventDurationInMinutes } from "../utils/getEventDurationInMinutes";
 
 const DayView = () => {
   const { currentDate, toggleModal, handleDateClick } = useCalendarContext();
@@ -28,6 +29,7 @@ const DayView = () => {
     return slotEvents;
   };
 
+  const slotEventHeight = 50;
   return (
     <>
       <div className="ml-24 grid grid-cols-7 gap-1">
@@ -60,6 +62,7 @@ const DayView = () => {
             )}
             {TIME_SLOTS.map((time, index) => {
               const slotEvents = getEventsForTimeSlot(time);
+
               return (
                 <div
                   onClick={() => {
@@ -73,28 +76,42 @@ const DayView = () => {
                     {time}
                   </div>
                   <div className="flex-1 hover:bg-gray-50 cursor-pointer relative flex gap-1">
-                    {slotEvents.map((event) => (
-                      <div
-                        key={event.id}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleSelectEvent(event);
-                          toggleEvent();
-                        }}
-                        className="bg-blue-100 border-l-4 border-blue-500 p-2 rounded text-sm group relative"
-                      >
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <div className="font-medium text-blue-900">
-                              {event.title}
-                            </div>
-                            <div className="text-blue-700 text-xs">
-                              {event.startTime} - {event.endTime}
+                    {slotEvents.map((event) => {
+                      const durationInMinutes = getEventDurationInMinutes(
+                        event.startTime,
+                        event.endTime
+                      );
+                      const height = (durationInMinutes / 60) * slotEventHeight;
+
+                      return (
+                        <div
+                          style={{ height: `${height + 5}px` }}
+                          key={event.id}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectEvent(event);
+                            toggleEvent();
+                          }}
+                          className="bg-blue-100 border-l-4 border-blue-500 px-2 rounded text-sm group relative"
+                        >
+                          <div className="flex justify-between items-start">
+                            <div
+                              className={`flex gap-2 ${
+                                height > 40 ? "flex-col" : "flex-row"
+                              }`}
+                            >
+                              <div className="font-medium text-xs text-blue-900">
+                                {event.title}
+                              </div>
+
+                              <div className="text-blue-700 text-xs">
+                                {event.startTime} - {event.endTime}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               );
