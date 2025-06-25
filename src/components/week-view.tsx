@@ -33,11 +33,25 @@ const WeekView = () => {
 
   const now = new Date();
 
-  const minutesInDay = isToday(currentDate)
-    ? now.getHours() * 60 + now.getMinutes()
-    : 0;
-  const slotHeight = 50;
-  const topOffsetRem = (minutesInDay * 3.125) / slotHeight;
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+  const calculateTimeOffset = (date: Date, slotTime: string) => {
+    if (!isToday(date)) return null;
+    const slotMinutes = timeToMinutes(slotTime);
+    const nextSlotIndex = TIME_SLOTS.findIndex((slot) => slot === slotTime) + 1;
+    const nextSlotMinutes =
+      nextSlotIndex < TIME_SLOTS.length
+        ? timeToMinutes(TIME_SLOTS[nextSlotIndex])
+        : 24 * 60;
+
+    if (currentMinutes >= slotMinutes && currentMinutes < nextSlotMinutes) {
+      const minutesIntoSlot = currentMinutes - slotMinutes;
+      const slotDurationMinutes = nextSlotMinutes - slotMinutes;
+      const offsetPercentage = minutesIntoSlot / slotDurationMinutes;
+      return offsetPercentage * 50;
+    }
+    return null;
+  };
 
   return (
     <section className="h-full">
@@ -73,14 +87,8 @@ const WeekView = () => {
             </span>
             {weekDates.map((date, dayIndex) => {
               const dayEvents = getEventsForDateAndTime(date, time);
-              const slotMinutes = timeToMinutes(time);
-              const nextSlotMinutes = timeToMinutes(
-                TIME_SLOTS[index + 1] || "23:00"
-              );
-              const isCurrentTimeSlot =
-                isToday(date) &&
-                slotMinutes <= minutesInDay &&
-                nextSlotMinutes > minutesInDay;
+              const timeOffset = calculateTimeOffset(date, time);
+
               return (
                 <div
                   key={dayIndex}
@@ -89,9 +97,9 @@ const WeekView = () => {
                   }}
                   className="border border-gray-200 cursor-pointer relative"
                 >
-                  {isCurrentTimeSlot && (
+                  {timeOffset !== null && (
                     <div
-                      style={{ top: `${topOffsetRem - slotHeight}px` }}
+                      style={{ top: `${timeOffset}px` }}
                       className="bg-red-400 absolute left-0 w-full h-0.5 z-40 transition-all duration-500 ease-in-out"
                     />
                   )}
